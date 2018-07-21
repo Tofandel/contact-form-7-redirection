@@ -168,7 +168,7 @@ class WPCF7_Redirect {
 						break;
 
 					case 'textarea':
-						$value = $value;
+						$value = htmlspecialchars( $value );
 						break;
 
 					case 'number':

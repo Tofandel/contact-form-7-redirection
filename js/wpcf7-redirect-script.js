@@ -8,6 +8,9 @@ function wpcf7_redirect_mailsent_handler() {
 		
 		// Script to run after sent.
 		if ( form.after_sent_script ) {
+			//form.after_sent_script = form.after_sent_script.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&');
+			//form.after_sent_script = form.after_sent_script.replace(/[\r\n]/g, "");
+			form.after_sent_script = htmlspecialchars_decode(form.after_sent_script);
 			eval( form.after_sent_script );
 		}
 
@@ -46,4 +49,23 @@ function wpcf7_redirect_mailsent_handler() {
 		}
 
 	}, false );
+}
+
+function htmlspecialchars_decode( string ) {
+	var map = {
+        '&amp;': '&',
+        '&#038;': "&",
+        '&lt;': '<',
+        '&gt;': '>',
+        '&quot;': '"',
+        '&#039;': "'",
+        '&#8217;': "’",
+        '&#8216;': "‘",
+        '&#8211;': "–",
+        '&#8212;': "—",
+        '&#8230;': "…",
+        '&#8221;': '”'
+    };
+
+    return string.replace(/\&[\w\d\#]{2,5}\;/g, function(m) { return map[m]; });
 }
