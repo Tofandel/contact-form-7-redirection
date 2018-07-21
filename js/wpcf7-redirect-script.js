@@ -8,8 +8,6 @@ function wpcf7_redirect_mailsent_handler() {
 		
 		// Script to run after sent.
 		if ( form.after_sent_script ) {
-			//form.after_sent_script = form.after_sent_script.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&');
-			//form.after_sent_script = form.after_sent_script.replace(/[\r\n]/g, "");
 			form.after_sent_script = htmlspecialchars_decode(form.after_sent_script);
 			eval( form.after_sent_script );
 		}
