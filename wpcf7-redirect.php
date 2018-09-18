@@ -3,7 +3,7 @@
  * Plugin Name:  Contact Form 7 Redirection
  * Plugin URI:   http://querysol.com/blog/product/contact-form-7-redirection/
  * Description:  Contact Form 7 Add-on - Redirect after mail sent.
- * Version:      1.2.7
+ * Version:      1.2.8
  * Author:       Query Solutions
  * Author URI:   http://querysol.com
  * Contributors: querysolutions, yuvalsabar
@@ -31,7 +31,7 @@ class WPCF7_Redirect {
 	public function __construct() {
 		$this->plugin_url       = plugin_dir_url( __FILE__ );
 		$this->plugin_path      = plugin_dir_path( __FILE__ );
-		$this->version          = '1.2.7';
+		$this->version          = '1.2.8';
 		$this->add_actions();
 	}
 
@@ -109,12 +109,20 @@ class WPCF7_Redirect {
 				'type' => 'checkbox',
 			),
 			array(
+				'name' => 'open_in_new_tab',
+				'type' => 'checkbox',
+			),
+			array(
 				'name' => 'http_build_query',
 				'type' => 'checkbox',
 			),
 			array(
-				'name' => 'open_in_new_tab',
+				'name' => 'http_build_query_selectively',
 				'type' => 'checkbox',
+			),
+			array(
+				'name' => 'http_build_query_selectively_fields',
+				'type' => 'text',
 			),
 			array(
 				'name' => 'after_sent_script',
@@ -193,9 +201,12 @@ class WPCF7_Redirect {
 		$args = array(
 			'post_type' => 'wpcf7_contact_form',
 			'posts_per_page' => -1,
+			'suppress_filters' => true
 		);
 		$query = new WP_Query( $args );
 
+		$forms = array();
+		
 		if ( $query->have_posts() ) :
 
 			$fields = $this->get_plugin_fields();
@@ -297,7 +308,7 @@ class WPCF7_Redirect {
 					$this->redirect_url = get_permalink( $this->fields['page_id'] );
 				}
 
-				// Pass fields from the form as URL query parameters
+				// Pass all fields from the form as URL query parameters
 				if ( isset( $this->redirect_url ) && $this->redirect_url ) {	
 					if ( $this->fields['http_build_query'] == 'on' ) {
 						$posted_data  = $submission->get_posted_data();
@@ -337,11 +348,10 @@ class WPCF7_Redirect {
 		</h2>
 
 		<fieldset>
-			<legend>
-				<?php esc_html_e( 'Select a page to redirect to on successful form submission.', 'wpcf7-redirect' );?>      
-			</legend>
-
 			<div class="field-wrap field-wrap-page-id">
+				<label for="wpcf7-redirect-page-id">
+					<?php esc_html_e( 'Select a page to redirect to on successful form submission.', 'wpcf7-redirect' );?>   
+				</label>
 				<?php
 				echo wp_dropdown_pages( array(
 						'echo'              => 0,
@@ -349,7 +359,7 @@ class WPCF7_Redirect {
 						'show_option_none'  => __( 'Choose Page', 'wpcf7-redirect' ),
 						'option_none_value' => '0',
 						'selected'          => $fields['page_id'],
-						'id'                => 'page_id',
+						'id'                => 'wpcf7-redirect-page-id',
 					)
 				);
 			?>        
@@ -366,12 +376,6 @@ class WPCF7_Redirect {
 			</label>
 		</div>
 
-		<div class="field-wrap field-wrap-http-build-query">
-			<input type="checkbox" id="wpcf7-redirect-http-build-query" name="wpcf7-redirect[http_build_query]" <?php checked( $fields['http_build_query'], 'on', true ); ?>/>
-			<label for="wpcf7-redirect-http-build-query">
-				<?php esc_html_e( 'Pass fields from the form as URL query parameters', 'wpcf7-redirect' );?>      
-			</label>
-		</div>
 
 		<div class="field-wrap field-wrap-open-in-new-tab">
 			<input type="checkbox" id="wpcf7-redirect-open-in-new-tab" name="wpcf7-redirect[open_in_new_tab]" <?php checked( $fields['open_in_new_tab'], 'on', true ); ?>/>
@@ -382,6 +386,21 @@ class WPCF7_Redirect {
 				</strong>
 				<?php esc_html_e( 'This option might not work as expected, since browsers often block popup windows. This option depends on the browser settings.', 'wpcf7-redirect' );?>
 			</div>
+		</div>
+
+		<div class="field-wrap field-wrap-http-build-query">
+			<input type="checkbox" id="wpcf7-redirect-http-build-query" class="checkbox-radio-1" name="wpcf7-redirect[http_build_query]" <?php checked( $fields['http_build_query'], 'on', true ); ?>/>
+			<label for="wpcf7-redirect-http-build-query">
+				<?php esc_html_e( 'Pass all the fields from the form as URL query parameters', 'wpcf7-redirect' );?>      
+			</label>
+		</div>
+
+		<div class="field-wrap field-wrap-http-build-query-selectively">
+			<input type="checkbox" id="wpcf7-redirect-http-build-query-selectively" class="checkbox-radio-1" name="wpcf7-redirect[http_build_query_selectively]" <?php checked( $fields['http_build_query_selectively'], 'on', true ); ?>/>
+			<label for="wpcf7-redirect-http-build-query-selectively">
+				<?php esc_html_e( 'Pass specific fields from the form as URL query parameters', 'wpcf7-redirect' );?>      
+			</label>
+			<input type="text" id="wpcf7-redirect-http-build-query-selectively-fields" class="field-hidden" placeholder="<?php esc_html_e( 'Fields to pass, separated by commas', 'wpcf7-redirect' );?>" name="wpcf7-redirect[http_build_query_selectively_fields]" value="<?php echo $fields['http_build_query_selectively_fields'];?>">
 		</div>
 
 		<hr />

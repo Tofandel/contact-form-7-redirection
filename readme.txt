@@ -2,8 +2,8 @@
 Tags: contact form 7 redirect, contact form 7 thank you page, redirect cf7, redirect contact form 7, contact form 7 success page, cf7 redirect
 Contributors: yuvalsabar
 Requires at least: 4.7.0
-Tested up to: 4.9.7
-Stable tag: 1.2.7
+Tested up to: 4.9.8
+Stable tag: 1.2.8
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -43,6 +43,10 @@ No. One of the reasons we developed this plugin, is because on_send_ok is now de
 
 == Changelog ==
 
+= 1.2.8 =
+* New feature: Pass specific fields from the form as URL query parameters.
+* Minor dev improvements.
+
 = 1.2.7 =
 * Script field now accepts special characters, such as < and >. 
 
@@ -58,7 +62,7 @@ No. One of the reasons we developed this plugin, is because on_send_ok is now de
 * Unnecessary variables removed.
 
 = 1.2.2 =
-* New feature: Pass fields from the form as URL query parameters.
+* New feature: Pass all fields from the form as URL query parameters.
 * Minor CSS changes.
 * Dev improvements.
 

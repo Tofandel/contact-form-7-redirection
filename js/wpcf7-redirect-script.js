@@ -5,45 +5,46 @@ jQuery(document).ready(function() {
 function wpcf7_redirect_mailsent_handler() {
 	document.addEventListener( 'wpcf7mailsent', function( event ) {
 		form = wpcf7_redirect_forms [ event.detail.contactFormId ];
-		
+
 		// Script to run after sent.
 		if ( form.after_sent_script ) {
-			form.after_sent_script = htmlspecialchars_decode(form.after_sent_script);
+			form.after_sent_script = htmlspecialchars_decode( form.after_sent_script );
 			eval( form.after_sent_script );
 		}
 
-		// Redirect to external URL.
+		// Set redirect URL
 		if ( form.use_external_url && form.external_url ) {
-			if ( form.http_build_query ) {
-				// Build http query
-				http_query = jQuery.param( event.detail.inputs, true );
-				form.external_url = form.external_url + '?' + http_query;
-			}
+			redirect_url = form.external_url;
+		} else {
+			redirect_url = form.thankyou_page_url;
+		}
 
+		// Build http query
+		if ( form.http_build_query ) {
+			http_query 	 = jQuery.param( event.detail.inputs, true );
+			redirect_url = redirect_url + '?' + http_query;
+		} else if ( form.http_build_query_selectively ) {
+			http_query = '?';
+			selective_fields = form.http_build_query_selectively_fields.replace(' ', '').split(',');
+			event.detail.inputs.forEach( function(element, index) {
+				if ( selective_fields.indexOf( element.name ) != -1 ) {
+					http_query += element.name + '=' + element.value + '&';
+				}
+			});
+
+			http_query = http_query.slice(0, -1);
+			redirect_url = redirect_url + http_query;
+		} 
+
+		// Redirect
+		if ( redirect_url ) {
 			if ( ! form.open_in_new_tab ) {
 				// Open in current tab
-				location.href = form.external_url;
+				location.href = redirect_url;
 			} else {
 				// Open in external tab
-				window.open( form.external_url );
+				window.open( redirect_url );
 			}
-		}
-		
-		// Redirect to a page in this site.
-		else if ( form.thankyou_page_url ) {
-			if ( form.http_build_query ) {
-				// Build http query
-				http_query = jQuery.param( event.detail.inputs, true );
-				form.thankyou_page_url = form.thankyou_page_url + '?' + http_query;
-			}
-
-			if ( ! form.open_in_new_tab ) {
-				// Open in current tab
-	    		location.href = form.thankyou_page_url;
-	    	} else {
-	    		// Open in new tab
-	    		window.open( form.thankyou_page_url );
-	    	}
 		}
 
 	}, false );
