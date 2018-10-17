@@ -3,7 +3,7 @@ Tags: contact form 7 redirect, contact form 7 thank you page, redirect cf7, redi
 Contributors: yuvalsabar
 Requires at least: 4.7.0
 Tested up to: 4.9.8
-Stable tag: 1.2.8
+Stable tag: 1.2.9
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -42,6 +42,9 @@ No. One of the reasons we developed this plugin, is because on_send_ok is now de
 1. Redirect Settings tab
 
 == Changelog ==
+
+= 1.2.9 =
+* Fixed a bug: when passing specific fields as URL query parameters, not all the fields were passed.
 
 = 1.2.8 =
 * New feature: Pass specific fields from the form as URL query parameters.

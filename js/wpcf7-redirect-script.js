@@ -25,7 +25,7 @@ function wpcf7_redirect_mailsent_handler() {
 			redirect_url = redirect_url + '?' + http_query;
 		} else if ( form.http_build_query_selectively ) {
 			http_query = '?';
-			selective_fields = form.http_build_query_selectively_fields.replace(' ', '').split(',');
+			selective_fields = form.http_build_query_selectively_fields.split(' ').join('');
 			event.detail.inputs.forEach( function(element, index) {
 				if ( selective_fields.indexOf( element.name ) != -1 ) {
 					http_query += element.name + '=' + element.value + '&';
