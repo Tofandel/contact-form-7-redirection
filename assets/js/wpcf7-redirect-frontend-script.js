@@ -1,7 +1,6 @@
 function Wpcf7_redirect(){
 
     this.init = function(){
-
         this.wpcf7_redirect_mailsent_handler();
     };
 
