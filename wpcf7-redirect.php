@@ -21,12 +21,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+if( defined('WPCF7_REDIRECT_BASE_PATH') ){
+	return;
+}
+
 define( 'WPCF7_REDIRECT_BASE_PATH' , plugin_dir_path( __FILE__ ) );
 define( 'WPCF7_REDIRECT_BASE_URL' , plugin_dir_url( __FILE__ ) );
 define( 'WPCF7_REDIRECT_CLASSES_PATH' , WPCF7_REDIRECT_BASE_PATH.'/classes/' );
 define( 'WPCF7_REDIRECT_PLUGINS_PATH' , plugin_dir_path( dirname( __FILE__ ) ) );
 define( 'WPCF7_REDIRECT_TEMPLATE_PATH' , WPCF7_REDIRECT_BASE_PATH.'/templates/' );
-
 
 require_once( WPCF7_REDIRECT_BASE_PATH . 'wpcf-redirect-functions.php' );
 require_once( WPCF7_REDIRECT_CLASSES_PATH . 'class-wpcf-redirect-base.php' );
