@@ -2,8 +2,8 @@
 Tags: contact form 7 redirect, contact form 7 thank you page, redirect cf7, redirect contact form 7, contact form 7 success page, cf7 redirect
 Contributors: yuvalsabar
 Requires at least: 4.7.0
-Tested up to: 4.9.8
-Stable tag: 1.2.9
+Tested up to: 5.0
+Stable tag: 1.3.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -17,6 +17,24 @@ NOTE: This plugin requires Contact Form 7 version 4.8 or later.
 == Usage ==
 
 Simply go to your form settings, choose the "Redirect Settings" tab and set the page you want to be redirected to.
+
+== Features ==
+
+* Redirect to any URL
+* Open page in a new tab
+* Run JavaScript after form submission (great for conversion management)
+* Pass fields from the form as URL query parameters
+* **[Pro]** Redirect rules
+* **[Pro]** Conditional logic for each action
+* **[Pro]** Manage email notifications by conditional logic
+* **[Pro]** Fire custom JavaScript events by conditional logic
+* **[Pro]** Send data to remote servers (3rd-party integration)
+* **[Pro]** Send RESTful Json/XML to remote servers
+* **[Pro]** Send RESTful POST/GET to remote servers
+* **[Pro]** Manage Facebook conversion pixels
+* **[Pro]** Manage Google Adwords conversion pixels
+
+> Note: some features are availible only in the Pro version. Which means you need Contact Form 7 Redirection Pro to unlock those features. You can [get Contact Form 7 Redirection Pro here](http://querysol.com/blog/product/contact-form-7-redirection/)!
 
 == Installation ==
 
@@ -42,6 +60,9 @@ No. One of the reasons we developed this plugin, is because on_send_ok is now de
 1. Redirect Settings tab
 
 == Changelog ==
+
+= 1.3.0 =
+* Minor dev improvements.
 
 = 1.2.9 =
 * Fixed a bug: when passing specific fields as URL query parameters, not all the fields were passed.
