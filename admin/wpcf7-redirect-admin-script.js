@@ -51,30 +51,15 @@ jQuery(document).ready(function($) {
         $( '.field-warning-alert' ).removeClass( 'field-notice-hidden' );
     }
 
-
-    // dismiss admin notice
     $('.wpcf7-redirect-pro-admin-notice .notice-dismiss').click(function(e) {
-        $.ajax({
-            type: 'POST',
-            dataType: 'json',
-            url: ajaxurl,
-            data: {
-                action: 'wpcf7_redirect_admin_notice_dismiss'
-            }
-        });
+        e.preventDefault();
+        sign = window.location.href.indexOf("?") > -1 ? '&' : '?';
+        location.href = window.location.href + sign + 'wpcf7_redirect_dismiss_notice=1';
     });
-    
-    // dismiss banner notice
-    $('#redirect-panel .banner-wrap .notice-dismiss').click(function(e) {
-        $('.banner-wrap').fadeOut(200);
 
-        $.ajax({
-            type: 'POST',
-            dataType: 'json',
-            url: ajaxurl,
-            data: {
-                action: 'wpcf7_redirect_banner_dismiss'
-            }
-        });
+    $('#redirect-panel .banner-wrap .notice-dismiss').click(function(e) {
+        e.preventDefault();
+        sign = window.location.href.indexOf("?") > -1 ? '&' : '?';
+        location.href = window.location.href + sign + 'wpcf7_redirect_dismiss_banner=1';
     });
 });

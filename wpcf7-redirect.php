@@ -3,7 +3,7 @@
  * Plugin Name:  Contact Form 7 Redirection
  * Plugin URI:   http://querysol.com/blog/product/contact-form-7-redirection/
  * Description:  Contact Form 7 Add-on - Redirect after mail sent.
- * Version:      1.3.0
+ * Version:      1.3.1
  * Author:       Query Solutions
  * Author URI:   http://querysol.com
  * Contributors: querysolutions, yuvalsabar
@@ -31,7 +31,7 @@ class WPCF7_Redirect {
 	public function __construct() {
 		$this->plugin_url       = plugin_dir_url( __FILE__ );
 		$this->plugin_path      = plugin_dir_path( __FILE__ );
-		$this->version          = '1.3.0';
+		$this->version          = '1.3.1';
 		$this->add_actions();
 	}
 
@@ -40,14 +40,14 @@ class WPCF7_Redirect {
 		update_option( 'wpcf7_redirect_banner_dismiss', 0 );
 	}
 
-	public function wpcf7_redirect_admin_notice_dismiss() {
-	    update_option( 'wpcf7_redirect_admin_notice_dismiss', 1 );
-	    die();
-	}
+	public function wpcf7_redirect_dismiss_ads() {
+		if ( isset( $_GET['wpcf7_redirect_dismiss_notice'] ) && $_GET['wpcf7_redirect_dismiss_notice'] == 1 ) {
+	    	update_option( 'wpcf7_redirect_admin_notice_dismiss', 1 );
+		} 
 
-	public function wpcf7_redirect_banner_dismiss() {
-	    update_option( 'wpcf7_redirect_banner_dismiss', 1 );
-	    die();
+		if ( isset( $_GET['wpcf7_redirect_dismiss_banner'] ) && $_GET['wpcf7_redirect_dismiss_banner'] == 1 ) {
+		    update_option( 'wpcf7_redirect_banner_dismiss', 1 );
+		}
 	}
 
 	/**
@@ -61,13 +61,9 @@ class WPCF7_Redirect {
 		add_action( 'wpcf7_after_save', array( $this, 'store_meta' ) );
 		add_action( 'wpcf7_after_create', array( $this, 'duplicate_form_support' ) );
 		add_action( 'wpcf7_submit', array( $this, 'non_ajax_redirection' ) );
-		add_action( 'wp_ajax_wpcf7_redirect_admin_notice_dismiss', array( $this, 'wpcf7_redirect_admin_notice_dismiss' ) );
-		add_action( 'wp_ajax_wpcf7_redirect_banner_dismiss', array( $this, 'wpcf7_redirect_banner_dismiss' ) );
-		add_action( 'admin_notices', array( $this, 'admin_notice' ) );
-
-		if ( ! get_option( 'wpcf7_redirect_admin_notice_dismiss' ) ) {
-			add_action( 'admin_notices', array( $this, 'pro_notice' ) );
-		}
+		add_action( 'admin_init', array( $this, 'wpcf7_redirect_dismiss_ads' ) );
+		add_action( 'admin_notices', array( $this, 'dependencies_notice' ) );
+		add_action( 'admin_notices', array( $this, 'pro_notice' ) );
 	}
 
 	/**
@@ -275,7 +271,7 @@ class WPCF7_Redirect {
 	/**
 	 * Verify CF7 dependencies.
 	 */
-	public function admin_notice() {
+	public function dependencies_notice() {
 		if ( is_plugin_active( 'contact-form-7/wp-contact-form-7.php' ) ) {
 			$wpcf7_path = plugin_dir_path( dirname( __FILE__ ) ) . 'contact-form-7/wp-contact-form-7.php';
 			$wpcf7_data = get_plugin_data( $wpcf7_path, false, false );
@@ -312,17 +308,17 @@ class WPCF7_Redirect {
 	}
 
 	public function pro_notice() {
-		?>
+		if ( ! get_option( 'wpcf7_redirect_admin_notice_dismiss' ) ) : ?>
 
-		<div class="wpcf7-redirect-pro-admin-notice updated notice is-dismissible">
-			<p>
-				<a href="https://querysol.com/product/contact-form-7-redirection/" target="_blank">
-					Contact Form 7 Redirection Pro - We've added exciting new features!
-				</a>
-			</p>
-		</div>
+			<div class="wpcf7-redirect-pro-admin-notice updated notice is-dismissible">
+				<p>
+					<a href="https://querysol.com/product/contact-form-7-redirection/" target="_blank">
+						Contact Form 7 Redirection Pro - We've added exciting new features!
+					</a>
+				</p>
+			</div>
 
-		<?php
+		<?php endif;
 	}
 
 

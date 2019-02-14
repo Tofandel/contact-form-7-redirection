@@ -61,6 +61,9 @@ No. One of the reasons we developed this plugin, is because on_send_ok is now de
 
 == Changelog ==
 
+= 1.3.1 =
+* Fixed a bug in legacy browsers: the Pro message keep showing.
+
 = 1.3.0 =
 * Minor dev improvements.
 
