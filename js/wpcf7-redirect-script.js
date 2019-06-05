@@ -39,11 +39,24 @@ function wpcf7_redirect_mailsent_handler() {
 		// Redirect
 		if ( redirect_url ) {
 			if ( ! form.open_in_new_tab ) {
+				console.log(form);
 				// Open in current tab
-				location.href = redirect_url;
+				if ( form.delay_redirect ) {
+					setTimeout(function() {
+						location.href = redirect_url;
+					}, form.delay_redirect);
+				} else {
+					location.href = redirect_url;
+				}
 			} else {
 				// Open in external tab
-				window.open( redirect_url );
+				if ( form.delay_redirect ) {
+					setTimeout(function() {
+						window.open( redirect_url );
+					}, form.delay_redirect);
+				} else {
+					window.open( redirect_url );
+				}
 			}
 		}
 

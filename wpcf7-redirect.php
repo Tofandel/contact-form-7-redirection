@@ -1,9 +1,9 @@
 <?php
 /**
  * Plugin Name:  Contact Form 7 Redirection
- * Plugin URI:   http://querysol.com/blog/product/contact-form-7-redirection/
+ * Plugin URI:   http://querysol.com
  * Description:  Contact Form 7 Add-on - Redirect after mail sent.
- * Version:      1.3.1
+ * Version:      1.3.2
  * Author:       Query Solutions
  * Author URI:   http://querysol.com
  * Contributors: querysolutions, yuvalsabar
@@ -31,7 +31,7 @@ class WPCF7_Redirect {
 	public function __construct() {
 		$this->plugin_url       = plugin_dir_url( __FILE__ );
 		$this->plugin_path      = plugin_dir_path( __FILE__ );
-		$this->version          = '1.3.1';
+		$this->version          = '1.3.2';
 		$this->add_actions();
 	}
 
@@ -140,6 +140,10 @@ class WPCF7_Redirect {
 			array(
 				'name' => 'http_build_query_selectively_fields',
 				'type' => 'text',
+			),
+			array(
+				'name' => 'delay_redirect',
+				'type' => 'number',
 			),
 			array(
 				'name' => 'after_sent_script',
@@ -446,6 +450,13 @@ class WPCF7_Redirect {
 				<?php esc_html_e( 'Pass specific fields from the form as URL query parameters', 'wpcf7-redirect' );?>      
 			</label>
 			<input type="text" id="wpcf7-redirect-http-build-query-selectively-fields" class="field-hidden" placeholder="<?php esc_html_e( 'Fields to pass, separated by commas', 'wpcf7-redirect' );?>" name="wpcf7-redirect[http_build_query_selectively_fields]" value="<?php echo $fields['http_build_query_selectively_fields'];?>">
+		</div>
+
+		<div class="field-wrap field-wrap-delay-redirect">
+			<label for="wpcf7-redirect-delay-redirect">
+				<?php esc_html_e( 'Delay redirect (in milliseconds)', 'wpcf7-redirect' );?>      
+			</label>
+			<input type="number" id="wpcf7-redirect-delay-redirect" name="wpcf7-redirect[delay_redirect]" value="<?php echo $fields['delay_redirect'];?>">
 		</div>
 
 		<hr />

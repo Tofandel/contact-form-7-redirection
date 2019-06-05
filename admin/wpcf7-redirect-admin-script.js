@@ -62,4 +62,5 @@ jQuery(document).ready(function($) {
         sign = window.location.href.indexOf("?") > -1 ? '&' : '?';
         location.href = window.location.href + sign + 'wpcf7_redirect_dismiss_banner=1';
     });
+    
 });

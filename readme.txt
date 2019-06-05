@@ -2,8 +2,16 @@
 Tags: contact form 7 redirect, contact form 7 thank you page, redirect cf7, redirect contact form 7, contact form 7 success page, cf7 redirect
 Contributors: yuvalsabar
 Requires at least: 4.7.0
+<<<<<<< .mine
+Tested up to: 5.2.1
+Stable tag: 1.3.2
+||||||| .r2047940
 Tested up to: 5.0
 Stable tag: 1.3.0
+=======
+Tested up to: 5.1.1
+Stable tag: 1.3.0
+>>>>>>> .r2100840
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -24,6 +32,11 @@ Simply go to your form settings, choose the "Redirect Settings" tab and set the 
 * Open page in a new tab
 * Run JavaScript after form submission (great for conversion management)
 * Pass fields from the form as URL query parameters
+
+* **[Pro]** Create registration forms
+* **[Pro]** Create login forms
+* **[Pro]** Add to Mailchimp list
+* **[Pro]** Conditional error managment
 * **[Pro]** Redirect rules
 * **[Pro]** Conditional logic for each action
 * **[Pro]** Manage email notifications by conditional logic
@@ -33,8 +46,11 @@ Simply go to your form settings, choose the "Redirect Settings" tab and set the 
 * **[Pro]** Send RESTful POST/GET to remote servers
 * **[Pro]** Manage Facebook conversion pixels
 * **[Pro]** Manage Google Adwords conversion pixels
+* **[Pro]** Leads Manager - save leads to database
+* **[Pro]** PayPal Integration
 
-> Note: some features are availible only in the Pro version. Which means you need Contact Form 7 Redirection Pro to unlock those features. You can [get Contact Form 7 Redirection Pro here](http://querysol.com/blog/product/contact-form-7-redirection/)!
+
+> Note: some features are availible only in the Pro version. Which means you need Contact Form 7 Redirection Pro to unlock those features. You can [get Contact Form 7 Redirection Pro here](http://querysol.com/product/contact-form-7-redirection/)!
 
 == Installation ==
 
@@ -60,6 +76,9 @@ No. One of the reasons we developed this plugin, is because on_send_ok is now de
 1. Redirect Settings tab
 
 == Changelog ==
+
+= 1.3.2 =
+* New feature: delay redirection in milliseconds.
 
 = 1.3.1 =
 * Fixed a bug in legacy browsers: the Pro message keep showing.
@@ -94,11 +113,11 @@ No. One of the reasons we developed this plugin, is because on_send_ok is now de
 * Dev improvements.
 
 = 1.2 =
-* Added option to add script after the form has been sent successfully.
+* New feature: add script after the form has been sent successfully.
 
 = 1.0.2 =
 * Added full support for form duplication.
-* Added option to open page in a new tab.
+* New feature: open page in a new tab.
 * Added plugin class CF7_Redirect.
 
 = 1.0.0 =
