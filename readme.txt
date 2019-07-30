@@ -2,16 +2,8 @@
 Tags: contact form 7 redirect, contact form 7 thank you page, redirect cf7, redirect contact form 7, contact form 7 success page, cf7 redirect
 Contributors: yuvalsabar
 Requires at least: 4.7.0
-<<<<<<< .mine
-Tested up to: 5.2.1
-Stable tag: 1.3.2
-||||||| .r2047940
-Tested up to: 5.0
-Stable tag: 1.3.0
-=======
-Tested up to: 5.1.1
-Stable tag: 1.3.0
->>>>>>> .r2100840
+Tested up to: 5.2.2
+Stable tag: 1.3.3
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -76,6 +68,9 @@ No. One of the reasons we developed this plugin, is because on_send_ok is now de
 1. Redirect Settings tab
 
 == Changelog ==
+
+= 1.3.3 =
+* Fixed a bug: URL query parameters are now properly decoded.
 
 = 1.3.2 =
 * New feature: delay redirection in milliseconds.

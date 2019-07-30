@@ -3,7 +3,7 @@
  * Plugin Name:  Contact Form 7 Redirection
  * Plugin URI:   http://querysol.com
  * Description:  Contact Form 7 Add-on - Redirect after mail sent.
- * Version:      1.3.2
+ * Version:      1.3.3
  * Author:       Query Solutions
  * Author URI:   http://querysol.com
  * Contributors: querysolutions, yuvalsabar
@@ -31,7 +31,7 @@ class WPCF7_Redirect {
 	public function __construct() {
 		$this->plugin_url       = plugin_dir_url( __FILE__ );
 		$this->plugin_path      = plugin_dir_path( __FILE__ );
-		$this->version          = '1.3.2';
+		$this->version          = '1.3.3';
 		$this->add_actions();
 	}
 
@@ -493,4 +493,3 @@ class WPCF7_Redirect {
 register_activation_hook( __FILE__, array( 'WPCF7_Redirect', 'install' ) );
 
 $cf7_redirect = new WPCF7_Redirect();
-
